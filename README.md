@@ -1,1 +1,1 @@
-# react
+# ReSci Style Guides
