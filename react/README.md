@@ -134,8 +134,7 @@ const newArr = [...arr, 4, 5, 6];
   {'High Score: ' + this.getHighScore()}
 <\HighScore>
 ```
-
-* Unlike object literals, do not use a pad JSX curly braces with spaces.
+* Unlike object literals, do not pad JSX curly braces with spaces.
 * Use parentheses when returning multi-line JSX content. Do not put any JSX on the same lines as the
   parentheses.
 
@@ -165,7 +164,7 @@ render() {
 ```
 
 ### Props
-* Destructure props whenever possible.
+* Destructure props whenever possible, unless only one is being used.
 
 ```
 // bad
@@ -177,6 +176,11 @@ renderHeader() {
 renderHeader() {
   const { title, subtitle } = this.props;
   return <div>{title + ": " + subtitle}</div>;
+}
+
+// Good: no need to destructure when only one prop is used.
+renderTitle() {
+  return <div>{this.props.title}</div>;
 }
 ```
 
