@@ -233,7 +233,7 @@ const PureComponent = ({ title, content, handleClick }) => {
 ```
 
 <!--- Links --->
-[airbnb-react]: github.com/airbnb/javascript/tree/master/react
-[object-spread]: github.com/sebmarkbage/ecmascript-rest-spread
-[react-rails]: github.com/reactjs/react-rails
-[babel]: babeljs.io
+[airbnb-react]: https://github.com/airbnb/javascript/tree/master/react
+[object-spread]: https://github.com/sebmarkbage/ecmascript-rest-spread
+[react-rails]: https://github.com/reactjs/react-rails
+[babel]: https://babeljs.io/
