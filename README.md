@@ -111,54 +111,54 @@ const newArr = [...arr, 4, 5, 6];
 * Self-close tags with no children. Use a single space before the closing tag.
 
 ```
-\\ bad
+// bad
 <NewComponent className="new-component"></NewComponent>
 
-\\ Bad: no space before closing tag.
+// Bad: no space before closing tag.
 <NewComponent className="new-component"/>
 
-\\ good
+// good
 <NewComponent className="new-component" />
 ```
 * Always use double quotes for JSX attributes; this usage mirrors the HTML convention. However,
   prefer single quotes for all other Javascript.
 
 ```
-\\ Bad: JSX attribute uses single quotes, and JS code uses unnecessary double quotes.
+// Bad: JSX attribute uses single quotes, and JS code uses unnecessary double quotes.
 <HighScore className='score-container'>
   {"High Score: " + this.getHighScore()}
-<\HighScore>
+</HighScore>
 
-\\ Good: JSX attribute uses double quotes, and JS code uses single quotes.
+// Good: JSX attribute uses double quotes, and JS code uses single quotes.
 <HighScore className="score-container">
   {'High Score: ' + this.getHighScore()}
-<\HighScore>
+</HighScore>
 ```
 * Unlike object literals, do not pad JSX curly braces with spaces.
 * Use parentheses when returning multi-line JSX content. Do not put any JSX on the same lines as the
   parentheses.
 
 ```
-\\ bad
+// bad
 render() {
   return <NewComponent>
-           <ul>{this.getContent()}<\ul>
-         <\NewComponent>;
+           <ul>{this.getContent()}</ul>
+         </NewComponent>;
 }
 
-\\ bad
+// bad
 render() {
   return (<NewComponent>
-            <ul>{this.getContent()}<\ul>
-          <\NewComponent>);
+            <ul>{this.getContent()}</ul>
+          </NewComponent>);
 }
 
-\\ good
+// good
 render() {
   return (
     <NewComponent>
-      <ul>{this.getContent()}<\ul>
-    <\NewComponent>
+      <ul>{this.getContent()}</ul>
+    </NewComponent>
   );
 }
 ```
