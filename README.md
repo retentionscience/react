@@ -135,6 +135,23 @@ const newArr = [...arr, 4, 5, 6];
 </HighScore>
 ```
 * Unlike object literals, do not pad JSX curly braces with spaces.
+
+```javascript
+// bad
+<Brontosaurus>{ this.getDinosaur() }</Brontosaurus>
+
+// good
+<Brontosaurus>{this.getDinosaur()}</Brontosaurus>
+```
+* Unlike ordinary JS expressions, do not pad JSX attribute assignments with spaces.
+
+```javascript
+// bad
+<Brontosaurus className = "thunder-lizard" key = {idx} />
+
+// good
+<Brontosaurus className="thunder-lizard" key={idx} />
+```
 * Use parentheses when returning multi-line JSX content. Do not put any JSX on the same lines as the
   parentheses.
 
@@ -163,6 +180,30 @@ render() {
 }
 ```
 
+* For multi-line JSX tags, put each attribute on its own indented line.
+
+```javascript
+// bad
+<AppComponent attributeOne="attribute-one"
+              attributeTwo="attribute-two"
+              attributeThree="attribute-three" />
+
+// good
+<AppComponent
+  attributeOne="attribute-one"
+  attributeTwo="attribute-two"
+  attributeThree="attribute-three"
+/>
+
+// For components with children:
+<AppComponent
+  attributeOne="attribute-one"
+  attributeTwo="attribute-two"
+>
+  <ChildComponent />
+</AppComponent>
+```
+
 ### Props
 * Destructure props whenever possible, unless only one is being used.
 
@@ -182,6 +223,27 @@ renderHeader() {
 renderTitle() {
   return <div>{this.props.title}</div>;
 }
+```
+* Omit the value of a prop if it is explicitly true.
+
+```javascript
+// bad
+<Winterfell winterIsComing={true} />
+
+// good
+<Winterfell winterIsComing />
+```
+* Used `mixedCase` (or `lowerCamelCase`) for prop names.
+
+```javascript
+// Bad: snake case.
+<Winterfell winter_is_coming />
+
+// Bad: pascal case.
+<Winterfell WinterIsComing />
+
+// good
+<Winterfell winterIsComing />
 ```
 
 ### Components
