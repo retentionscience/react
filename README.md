@@ -23,7 +23,7 @@
 ### Comments
 * Punctuate and appropriately capitalize comments longer than one word.
 
-```
+```javascript
 // this is bad comment
 const foo = someFunction();
 
@@ -43,7 +43,7 @@ const bar = someOtherFunction();
 ### Object and array literals
 * Prefer ES6 shorthand for object literals with matching key-value names.
 
-```
+```javascript
 // bad
 const firstName = 'Barry';
 const lastName  = 'Selmy';
@@ -59,7 +59,7 @@ const person = { firstName, lastName };
 * Do not mix ES6 shorthand with full `key: value` syntax within the same object. Use the full syntax
 if necessary in such cases, but prefer consistent shorthand.
 
-```
+```javascript
 // bad
 const apple      = 'green';
 const strawberry = 'red';
@@ -83,7 +83,7 @@ const fruit = { apple, strawberry, banana };
 ones. Note that object spread is still a [Stage 2 proposal for ECMAScript][object-spread] and
 requires a transformer like [Babel][babel].
 
-```
+```javascript
 // bad
 const obj       = { one: 1, two: 2 };
 const newObject = Object.assign({}, obj, { three: 3 });
@@ -95,7 +95,7 @@ const newObject = { ...obj, three: 3 }
 
 * Prefer the array spread operator to `Array.concat` when duplicating arrays or creating new ones.
 
-```
+```javascript
 // bad
 const arr    = [1, 2, 3];
 const newArr = arr.concat([4, 5, 6])
@@ -110,7 +110,7 @@ const newArr = [...arr, 4, 5, 6];
 ### JSX
 * Self-close tags with no children. Use a single space before the closing tag.
 
-```
+```javascript
 // bad
 <NewComponent className="new-component"></NewComponent>
 
@@ -123,7 +123,7 @@ const newArr = [...arr, 4, 5, 6];
 * Always use double quotes for JSX attributes; this usage mirrors the HTML convention. However,
   prefer single quotes for all other Javascript.
 
-```
+```javascript
 // Bad: JSX attribute uses single quotes, and JS code uses unnecessary double quotes.
 <HighScore className='score-container'>
   {"High Score: " + this.getHighScore()}
@@ -138,7 +138,7 @@ const newArr = [...arr, 4, 5, 6];
 * Use parentheses when returning multi-line JSX content. Do not put any JSX on the same lines as the
   parentheses.
 
-```
+```javascript
 // bad
 render() {
   return <NewComponent>
@@ -166,7 +166,7 @@ render() {
 ### Props
 * Destructure props whenever possible, unless only one is being used.
 
-```
+```javascript
 // bad
 renderHeader() {
   return <div>{this.props.title + ": " + this.props.subtitle}</div>;
@@ -188,26 +188,26 @@ renderTitle() {
 
 #### Method ordering
 
-1. `constructor`
+1. `constructor`.
   1. Set the initial state here. Do not use `getInitialState`.
   2. Bind event handlers here. Binding in the render call creates a brand new function every time.
-2. `componentDidMount`
-3. `componentWillUnmount`
-4. Component update lifecycle methods, including `componentWillReceiveProps`
-5. Event handlers
-  1. Name callbacks triggered by user actions as `handle[UserAction]`, like `handleClick` or
+2. `componentDidMount`.
+3. `componentWillUnmount`.
+4. Component update lifecycle methods, including `componentWillReceiveProps`.
+5. Event handlers.
+  1. Name callbacks triggered by user actions `handle[UserAction]`, like `handleClick` or
   `handleSubmit`.
-  2. Name callbacks registered with a dispatcher/store as `on[EventName]Event`, like `onChangeEvent`
+  2. Name callbacks registered with a dispatcher/store `on[EventName]Event`, like `onChangeEvent`
   or `onLoginEvent`.
 6. Helper methods for rendering the component, like `getVisitorCount` or `getTimeOfDay`.
 7. Render methods to build subparts of the component, like `renderTitle` or `renderMenuButtons`.
-8. `render`
+8. `render`.
 
 #### Pure components
 * Write pure components as plain Javascript objects. Use an explicit return statement when returning
 JSX content, which will likely always be the case for React components.
 
-```
+```javascript
 // bad
 class PureComponent extends React.Component {
   render() {
