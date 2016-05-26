@@ -10,8 +10,8 @@
   * Pure components that are closely related to another component may share a file with that
     component.
 * Use `PascalCase` for filenames and `.jsx` for extensions.
-  * For files used only within a Rails assets pipeline (via the [`react-rails`][react-rails] gem),
-    use `snake_case.js.jsx` instead.
+  * For files used only within a Rails assets pipeline (via the [`react-rails`][react-rails] gem,
+    for instance), use `snake_case.js.jsx` instead.
 
 ### Component names
 * In general, use `PascalCase` to refer to components and `mixedCase` to refer to their
@@ -24,10 +24,10 @@
 * Punctuate and appropriately capitalize comments longer than one word.
 
 ```javascript
-// this is bad comment
+// heres a bad comment
 const foo = someFunction();
 
-// This is a good comment.
+// Here's a much better comment.
 const bar = someOtherFunction();
 ```
 * Place comments on the line immediately preceding the code they refer to. Again, this rule may be
@@ -37,8 +37,33 @@ const bar = someOtherFunction();
 
 ### Alignment and spacing
 * Limit lines to 100 characters.
-* Align declarations on the equals sign. Do not make multiple declarations on the same line. If a
-  long list of declarations is required, refactoring is probably in order.
+* Align declarations within the same 'paragraph' on the equals sign.
+
+```javascript
+// bad
+const firstName = 'Arwen';
+const age = 2776;
+
+// good
+const firstName = 'Arwen';
+const age       = 2776;
+```
+* Do not make multiple declarations on the same line. If a long list of declarations is required,
+  refactoring (or destructuring) is in order.
+
+```javascript
+// bad
+const a = 1, b = 2, c = 3, d = 4;
+
+// Okay, but not ideal.
+const a = 1;
+const b = 2;
+const c = 3;
+const d = 4;
+
+// Better, probably.
+const [a, b, c, d] = [1, 2, 3, 4];
+```
 
 ### Object and array literals
 * Prefer ES6 shorthand for object literals with matching key-value names.
@@ -85,12 +110,12 @@ requires a transformer like [Babel][babel].
 
 ```javascript
 // bad
-const obj       = { one: 1, two: 2 };
-const newObject = Object.assign({}, obj, { three: 3 });
+const obj    = { one: 1, two: 2 };
+const newObj = Object.assign({}, obj, { three: 3 });
 
 // good
-const obj       = { one: 1, two: 2 };
-const newObject = { ...obj, three: 3 }
+const obj    = { one: 1, two: 2 };
+const newObj = { ...obj, three: 3 }
 ```
 
 * Prefer the array spread operator to `Array.concat` when duplicating arrays or creating new ones.
@@ -158,24 +183,24 @@ const newArr = [...arr, 4, 5, 6];
 ```javascript
 // bad
 render() {
-  return <NewComponent>
-           <ul>{this.getContent()}</ul>
-         </NewComponent>;
+  return <ListComponent>
+           <ul>{this.getListItems()}</ul>
+         </ListComponent>;
 }
 
 // bad
 render() {
-  return (<NewComponent>
-            <ul>{this.getContent()}</ul>
-          </NewComponent>);
+  return (<ListComponent>
+            <ul>{this.getListItems()}</ul>
+          </ListComponent>);
 }
 
 // good
 render() {
   return (
-    <NewComponent>
-      <ul>{this.getContent()}</ul>
-    </NewComponent>
+    <ListComponent>
+      <ul>{this.getListItems()}</ul>
+    </ListComponent>
   );
 }
 ```
@@ -287,8 +312,8 @@ class PureComponent extends React.Component {
 const PureComponent = ({ title, content, handleClick }) => {
   return (
     <div className="pure-component" onClick={handleClick}>
-      <h4>{this.props.title}</h4>
-      {this.props.content}
+      <h4>{title}</h4>
+      {content}
     </div>
   );
 }
