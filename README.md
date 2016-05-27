@@ -270,6 +270,42 @@ renderTitle() {
 // good
 <Winterfell winterIsComing />
 ```
+### The `key` prop
+* Do not use an array index as the `key` prop when creating lists of JSX elements.
+  [This is an anti-pattern][key-prop-index].
+
+```javascript
+// Bad: array index as key prop.
+renderListItems() {
+  return this.getListItems().map((item, idx) => {
+    return <li key={idx}>{item.name}</li>;
+  });
+}
+
+// Good: unique ID as key prop.
+renderListItems() {
+  return this.getListItems().map(item => {
+    return <li key={item.id}>{item.name}</li>;
+  });
+}
+```
+* An exception to this rule can be made for iterables that behave as constant properties. Freezing
+  such objects can be an additional precaution, but if it is truly a constant property, this should
+  be unnecessary.
+
+```javascript
+constructor(props) {
+  // Other constructor things...
+  this.NAMES = Object.freeze(['Blackfyre', 'Bloodraven', 'Bittersteel']);
+}
+
+// Good: a given index will always refer to the same name.
+renderNameList() {
+  return this.NAMES.map((name, idx) => {
+    return <li key={idx}>{name}</li>;
+  })
+}
+```
 
 ### Components
 
@@ -321,6 +357,7 @@ const PureComponent = ({ title, content, handleClick }) => {
 
 <!--- Links --->
 [airbnb-react]: https://github.com/airbnb/javascript/tree/master/react
-[object-spread]: https://github.com/sebmarkbage/ecmascript-rest-spread
 [react-rails]: https://github.com/reactjs/react-rails
+[object-spread]: https://github.com/sebmarkbage/ecmascript-rest-spread
 [babel]: https://babeljs.io/
+[key-prop-index]: https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318
