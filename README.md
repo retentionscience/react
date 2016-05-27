@@ -2,6 +2,24 @@
 
 (Adapted from [Airbnb's mostly reasonable guide][airbnb-react].)
 
+## Table of Contents
+
+1. [Organization](#organization)
+  * [File structure](#file-structure)
+  * [Component names](#component-names)
+1. [General JS Syntax](#general-js-syntax)
+  * [Comments](#comments)
+  * [Alignment and spacing](#alignment-and-spacing)
+  * [Object and array literals](#object-and-array-literals)
+1. [React Syntax](#react-syntax)
+  * [JSX tags](#jsx-tags)
+  * [Props](#props)
+    * [The `key` prop](#the-key-prop)
+  * [Components](#components)
+    * [Method ordering](#method-ordering)
+    * [Pure components](#pure-components)
+
+
 ## Organization
 
 ### File structure
@@ -18,7 +36,7 @@
   instances.
 * Prefer `PascalCase` to refer to instances that behave as singletons, like Flux stores.
 
-## General Syntax
+## General JS Syntax
 
 ### Comments
 * Punctuate and appropriately capitalize comments longer than one word.
@@ -132,7 +150,7 @@ const newArr = [...arr, 4, 5, 6];
 
 ## React Syntax
 
-### JSX
+### JSX tags
 * Self-close tags with no children. Use a single space before the closing tag.
 
 ```javascript
@@ -270,7 +288,7 @@ renderTitle() {
 // good
 <Winterfell winterIsComing />
 ```
-### The `key` prop
+#### The `key` prop
 * Do not use an array index as the `key` prop when creating lists of JSX elements.
   [This is an anti-pattern][key-prop-index].
 
