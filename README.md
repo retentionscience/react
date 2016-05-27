@@ -5,19 +5,20 @@
 ## Table of Contents
 
 1. [Organization](#organization)
-  * [File structure](#file-structure)
-  * [Component names](#component-names)
+  1. [File structure](#file-structure)
+  1. [Component names](#component-names)
 1. [General JS Syntax](#general-js-syntax)
-  * [Comments](#comments)
-  * [Alignment and spacing](#alignment-and-spacing)
-  * [Object and array literals](#object-and-array-literals)
+  1. [ES6](#es6)
+  1. [Comments](#comments)
+  1. [Alignment and spacing](#alignment-and-spacing)
+  1. [Object and array literals](#object-and-array-literals)
 1. [React Syntax](#react-syntax)
-  * [JSX tags](#jsx-tags)
-  * [Props](#props)
-    * [The `key` prop](#the-key-prop)
-  * [Components](#components)
-    * [Method ordering](#method-ordering)
-    * [Pure components](#pure-components)
+  1. [JSX tags](#jsx-tags)
+  1. [Props](#props)
+    1. [The `key` prop](#the-key-prop)
+  1. [Components](#components)
+    1. [Method ordering](#method-ordering)
+    1. [Pure components](#pure-components)
 
 
 ## Organization
@@ -37,6 +38,10 @@
 * Prefer `PascalCase` to refer to instances that behave as singletons, like Flux stores.
 
 ## General JS Syntax
+
+### ES6
+* This style guide assumes (and encourages) the use of ECMAScript 6 for all JavaScript code,
+  whether React or otherwise.
 
 ### Comments
 * Punctuate and appropriately capitalize comments longer than one word.
@@ -164,7 +169,7 @@ const newArr = [...arr, 4, 5, 6];
 <NewComponent className="new-component" />
 ```
 * Always use double quotes for JSX attributes; this usage mirrors the HTML convention. However,
-  prefer single quotes for all other Javascript.
+  prefer single quotes for all other JavaScript.
 
 ```javascript
 // Bad: JSX attribute uses single quotes, and JS code uses unnecessary double quotes.
@@ -331,22 +336,22 @@ renderNameList() {
 
 1. `constructor`.
   1. Set the initial state here. Do not use `getInitialState`.
-  2. Bind event handlers here. Binding in the render call creates a brand new function every time.
-2. `componentDidMount`.
-3. `componentWillUnmount`.
-4. Component update lifecycle methods, including `componentWillReceiveProps`.
-5. Event handlers.
+  1. Bind event handlers here. Binding in the render call creates a brand new function every time.
+1. `componentDidMount`.
+1. `componentWillUnmount`.
+1. Component update lifecycle methods, including `componentWillReceiveProps`.
+1. Event handlers.
   1. Name callbacks triggered by user actions `handle[UserAction]`, like `handleClick` or
   `handleSubmit`.
-  2. Name callbacks registered with a dispatcher/store `on[EventName]Event`, like `onChangeEvent`
+  1. Name callbacks registered with a dispatcher/store `on[EventName]Event`, like `onChangeEvent`
   or `onLoginEvent`.
-6. Helper methods for rendering the component, like `getVisitorCount` or `getTimeOfDay`.
-7. Render methods to build subparts of the component, like `renderTitle` or `renderMenuButtons`.
-8. `render`.
+1. Helper methods for rendering the component, like `getVisitorCount` or `getTimeOfDay`.
+1. Render methods to build subparts of the component, like `renderTitle` or `renderMenuButtons`.
+1. `render`.
 
 #### Pure components
-* Write pure components as plain Javascript objects. Use an explicit return statement when returning
-JSX content, which will likely always be the case for React components.
+* Write pure components as plain JS objects. Use an explicit return statement when returning
+  JSX content, which will likely always be the case for React components.
 
 ```javascript
 // bad
