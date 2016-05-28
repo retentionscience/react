@@ -8,10 +8,11 @@
   1. [File structure](#file-structure)
   1. [Component names](#component-names)
 1. [General JS Syntax](#general-js-syntax)
-  1. [ES6](#es6)
+  1. [ECMAScript 6](#ecmascript-6)
   1. [Comments](#comments)
   1. [Alignment and spacing](#alignment-and-spacing)
   1. [Object and array literals](#object-and-array-literals)
+  1. [Templates and string literals](#templates-and-string-literals)
 1. [React Syntax](#react-syntax)
   1. [JSX tags](#jsx-tags)
   1. [Props](#props)
@@ -39,8 +40,8 @@
 
 ## General JS Syntax
 
-### ES6
-* This style guide assumes (and encourages) the use of ECMAScript 6 for all JavaScript code,
+### ECMAScript 6
+* This style guide assumes (and encourages) the use of ECMAScript 6 (ES6) for all JavaScript code,
   whether React or otherwise.
 
 ### Comments
@@ -153,6 +154,43 @@ const arr    = [1, 2, 3];
 const newArr = [...arr, 4, 5, 6];
 ```
 
+### Templates and string literals
+* Use single quotes for string literals.
+
+```javascript
+// bad
+const pub = "The Three Broomsticks";
+
+// good
+const pub = 'The Three Broomsticks';
+```
+* Prefer double quotes over escape characters for strings containing `'`.
+
+```javascript
+// bad
+const pub = 'The Hog\'s Head';
+
+// good
+const pub = "The Hog's Head";
+
+```
+* Prefer templates and interpolation over string concatenation. Do not pad interpolation curly
+  braces with spaces.
+
+```javascript
+// bad
+const name   = 'Odysseus';
+const source = 'Ithaca';
+
+const title = name + ' of ' + source;
+
+// Good. Note: no spaces within curly braces in template.
+const name   = 'Ajax';
+const source = 'Telamon';
+
+const title = `${name} of ${source}`;
+```
+
 ## React Syntax
 
 ### JSX tags
@@ -168,19 +206,15 @@ const newArr = [...arr, 4, 5, 6];
 // good
 <NewComponent className="new-component" />
 ```
-* Always use double quotes for JSX attributes; this usage mirrors the HTML convention. However,
-  prefer single quotes for all other JavaScript.
+* Always use double quotes for JSX attributes; this usage mirrors the HTML convention. (Note:
+  continue to use single quotes for all JavaScript statements within JSX elements.)
 
 ```javascript
-// Bad: JSX attribute uses single quotes, and JS code uses unnecessary double quotes.
-<HighScore className='score-container'>
-  {"High Score: " + this.getHighScore()}
-</HighScore>
+// bad
+<HighScore className='score-container' />
 
-// Good: JSX attribute uses double quotes, and JS code uses single quotes.
-<HighScore className="score-container">
-  {'High Score: ' + this.getHighScore()}
-</HighScore>
+// good
+<HighScore className="score-container" />
 ```
 * Unlike object literals, do not pad JSX curly braces with spaces.
 
