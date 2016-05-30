@@ -292,13 +292,13 @@ render() {
 ```javascript
 // bad
 renderHeader() {
-  return <div>{this.props.title + ": " + this.props.subtitle}</div>;
+  return <div>{`${this.props.title}: ${this.props.subtitle}`}</div>;
 }
 
 // good
 renderHeader() {
   const { title, subtitle } = this.props;
-  return <div>{title + ": " + subtitle}</div>;
+  return <div>{`${title}: ${subtitle}`}</div>;
 }
 
 // Good: no need to destructure when only one prop is used.
