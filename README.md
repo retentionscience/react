@@ -106,7 +106,7 @@ const lastName  = 'Dayne';
 const person = { firstName, lastName };
 ```
 * Do not mix ES6 shorthand with full `key: value` syntax within the same object. Use the full syntax
-if necessary in such cases, but prefer consistent shorthand.
+  if necessary in such cases, but prefer consistent shorthand.
 
 ```javascript
 // bad
@@ -139,7 +139,7 @@ const newObj = Object.assign({}, obj, { three: 3 });
 
 // good
 const obj    = { one: 1, two: 2 };
-const newObj = { ...obj, three: 3 }
+const newObj = { ...obj, three: 3 };
 ```
 
 * Prefer the array spread operator to `Array.concat` when duplicating arrays or creating new ones.
@@ -147,7 +147,7 @@ const newObj = { ...obj, three: 3 }
 ```javascript
 // bad
 const arr    = [1, 2, 3];
-const newArr = arr.concat([4, 5, 6])
+const newArr = arr.concat([4, 5, 6]);
 
 // good
 const arr    = [1, 2, 3];
@@ -229,10 +229,10 @@ const title = `${name} of ${source}`;
 
 ```javascript
 // bad
-<Brontosaurus className = "thunder-lizard" key = {idx} />
+<Brontosaurus className = "thunder-lizard" period = "Jurassic" />
 
 // good
-<Brontosaurus className="thunder-lizard" key={idx} />
+<Brontosaurus className="thunder-lizard" period="Jurassic" />
 ```
 * Use parentheses when returning multi-line JSX content. Do not put any JSX on the same lines as the
   parentheses.
@@ -281,29 +281,36 @@ render() {
 <AppComponent
   attributeOne="attribute-one"
   attributeTwo="attribute-two"
+  attributeThree="attribute-three"
 >
   <ChildComponent />
 </AppComponent>
 ```
 
 ### Props
-* Destructure props whenever possible, unless only one is being used.
+* Destructure props whenever possible. If only one prop is used, destructuring may not be necessary.
 
 ```javascript
 // bad
-renderHeader() {
-  return <div>{`${this.props.title}: ${this.props.subtitle}`}</div>;
+renderName() {
+  return <div>{`My name is ${this.props.firstName} ${this.props.lastName}.`}</div>;
 }
 
 // good
-renderHeader() {
-  const { title, subtitle } = this.props;
-  return <div>{`${title}: ${subtitle}`}</div>;
+renderName() {
+  const { firstName, lastName } = this.props;
+  return <div>{`My name is ${firstName} ${lastName}.`}</div>;
 }
 
-// Good: no need to destructure when only one prop is used.
-renderTitle() {
-  return <div>{this.props.title}</div>;
+// Good: no need to destructure when a single prop is used once.
+renderName() {
+  return <div>{`The name's ${this.props.name}.`}</div>;
+}
+
+// Good: do destructure when a single prop is called multiple times.
+renderName() {
+  const { name } = this.props;
+  return <div>{`O ${name}, ${name}! wherefore art thou ${name}?`}</div>;
 }
 ```
 * Omit the value of a prop if it is explicitly true.
@@ -315,7 +322,7 @@ renderTitle() {
 // good
 <Winterfell winterIsComing />
 ```
-* Used `mixedCase` (or `lowerCamelCase`) for prop names.
+* Use `mixedCase` (or `lowerCamelCase`) for prop names.
 
 ```javascript
 // Bad: snake case.
@@ -347,8 +354,8 @@ renderListItems() {
 }
 ```
 * An exception to this rule can be made for iterables that behave as constant properties. Freezing
-  such objects can be an additional precaution, but if it is truly a constant property, this should
-  be unnecessary.
+  such objects can be an additional precaution, but if they are truly constant properties, that
+  should be unnecessary.
 
 ```javascript
 constructor(props) {
@@ -356,7 +363,7 @@ constructor(props) {
   this.NAMES = Object.freeze(['Blackfyre', 'Bloodraven', 'Bittersteel']);
 }
 
-// Good: a given index will always refer to the same name.
+// Good: a given index will always refer to the same list element.
 renderNameList() {
   return this.NAMES.map((name, idx) => {
     return <li key={idx}>{name}</li>;
@@ -376,11 +383,12 @@ renderNameList() {
 1. Component update lifecycle methods, including `componentWillReceiveProps`.
 1. Event handlers.
   1. Name callbacks triggered by user actions `handle[UserAction]`, like `handleClick` or
-  `handleSubmit`.
+     `handleSubmit`.
   1. Name callbacks registered with a dispatcher/store `on[EventName]Event`, like `onChangeEvent`
-  or `onLoginEvent`.
+     or `onLoginEvent`.
 1. Helper methods for rendering the component, like `getVisitorCount` or `getTimeOfDay`.
-1. Render methods to build subparts of the component, like `renderTitle` or `renderMenuButtons`.
+1. Render methods to build smaller parts of the component, named `render[PartName]`, like
+   `renderTitle` or `renderMenuButtons`.
 1. `render`.
 
 #### Pure components
