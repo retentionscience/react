@@ -12,9 +12,11 @@
   1. [Comments](#comments)
   1. [Alignment and spacing](#alignment-and-spacing)
   1. [Object and array literals](#object-and-array-literals)
-  1. [Templates and string literals](#templates-and-string-literals)
+  1. [String literals and templates](#string-literals-and-templates)
+  1. [Arrow functions](#arrow-functions)
 1. [React Syntax](#react-syntax)
   1. [JSX tags](#jsx-tags)
+  1. [Returning JSX](#returning-jsx)
   1. [Props](#props)
     1. [The `key` prop](#the-key-prop)
   1. [Components](#components)
@@ -154,7 +156,7 @@ const arr    = [1, 2, 3];
 const newArr = [...arr, 4, 5, 6];
 ```
 
-### Templates and string literals
+### String literals and templates
 * Use single quotes for string literals.
 
 ```javascript
@@ -164,7 +166,7 @@ const pub = "The Three Broomsticks";
 // good
 const pub = 'The Three Broomsticks';
 ```
-* Prefer double quotes over escape characters for strings containing `'`.
+* Use double quotes rather than escape characters for strings containing `'`.
 
 ```javascript
 // bad
@@ -174,7 +176,7 @@ const pub = 'The Hog\'s Head';
 const pub = "The Hog's Head";
 
 ```
-* Prefer templates and interpolation over string concatenation. Do not pad interpolation curly
+* Use templates with interpolation instead of string concatenation. Do not pad interpolation curly
   braces with spaces.
 
 ```javascript
@@ -189,6 +191,25 @@ const name   = 'Ajax';
 const source = 'Telamon';
 
 const title = `${name} of ${source}`;
+```
+
+### Arrow functions
+* Prefer concise arrow functions (with implied return statements) to block functions (which require
+  explicit return statements), except when [returning JSX content](#returning-jsx).
+
+```javascript
+const numbers = [1, 2, 3, 4];
+
+// bad
+const squares = numbers.map(n => {
+  return n * n;
+});
+
+// bad
+const squares = numbers.map(n => { return n * n; });
+
+// good
+const squares = numbers.map(n => n * n);
 ```
 
 ## React Syntax
@@ -234,6 +255,54 @@ const title = `${name} of ${source}`;
 // good
 <Brontosaurus className="thunder-lizard" period="Jurassic" />
 ```
+* For multi-line JSX tags, put each attribute on its own indented line.
+
+```javascript
+// bad
+<AppComponent attributeOne="attribute-one"
+              attributeTwo="attribute-two"
+              attributeThree="attribute-three" />
+
+// good
+<AppComponent
+  attributeOne="attribute-one"
+  attributeTwo="attribute-two"
+  attributeThree="attribute-three"
+/>
+
+// For components with children:
+<AppComponent
+  attributeOne="attribute-one"
+  attributeTwo="attribute-two"
+  attributeThree="attribute-three"
+>
+  <ChildComponent />
+</AppComponent>
+```
+
+### Returning JSX
+* Always use a block with an explicit return statement for arrow functions that return JSX content.
+  Put the return statement on its own line.
+
+```javascript
+// bad
+renderList() {
+  return this.props.items.map(item => <ListItem key={item.id}>{item.name}</ListItem>)
+}
+
+// bad
+renderList() {
+  return this.props.items.map(item => { return <ListItem key={item.id}>{item.name}</ListItem>; });
+}
+
+// good
+renderList() {
+  return this.props.items.map(item => {
+    return <ListItem key={item.id}>{item.name}</ListItem>;
+  });
+}
+```
+
 * Use parentheses when returning multi-line JSX content. Do not put any JSX on the same lines as the
   parentheses.
 
@@ -260,31 +329,6 @@ render() {
     </ListComponent>
   );
 }
-```
-
-* For multi-line JSX tags, put each attribute on its own indented line.
-
-```javascript
-// bad
-<AppComponent attributeOne="attribute-one"
-              attributeTwo="attribute-two"
-              attributeThree="attribute-three" />
-
-// good
-<AppComponent
-  attributeOne="attribute-one"
-  attributeTwo="attribute-two"
-  attributeThree="attribute-three"
-/>
-
-// For components with children:
-<AppComponent
-  attributeOne="attribute-one"
-  attributeTwo="attribute-two"
-  attributeThree="attribute-three"
->
-  <ChildComponent />
-</AppComponent>
 ```
 
 ### Props
@@ -392,8 +436,7 @@ renderNameList() {
 1. `render`.
 
 #### Pure components
-* Write pure components as plain JS objects. Use an explicit return statement when returning
-  JSX content, which will likely always be the case for React components.
+* Write pure components as plain JS objects.
 
 ```javascript
 // bad
