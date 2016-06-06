@@ -19,6 +19,7 @@
   1. [Returning JSX](#returning-jsx)
   1. [Props](#props)
     1. [The `key` prop](#the-key-prop)
+  1. [Event handlers](#event-handlers)
   1. [Components](#components)
     1. [Method ordering](#method-ordering)
     1. [Pure components](#pure-components)
@@ -287,7 +288,7 @@ const squares = numbers.map(n => n * n);
 ```javascript
 // bad
 renderList() {
-  return this.props.items.map(item => <ListItem key={item.id}>{item.name}</ListItem>)
+  return this.props.items.map(item => <ListItem key={item.id}>{item.name}</ListItem>);
 }
 
 // bad
@@ -414,6 +415,46 @@ renderNameList() {
   })
 }
 ```
+
+### Event handlers
+* Use `e` to denote the event variable within an event handler. Naming this variable `event` will
+  cause the global `event` object to be shadowed within the scope of the event handler.
+
+```javascript
+// bad
+handleContentChange(event) {
+  this.setState({ content: event.target.value });
+}
+
+// good
+handleContentChange(e) {
+  this.setState({ content: e.target.value });
+}
+```
+* If an event handler requires additional parameters at the time of invocation, use an arrow
+  function to pass the relevant event (if any) as the handler's first argument and the additional
+  parameters as subsequent arguments.
+
+```javascript
+handleFieldChange(e, field) {
+  this.setState({ [field]: e.target.value });
+}
+
+handleClick(field) {
+  console.log(`${field} clicked!`);
+}
+
+renderSomeField() {
+  return (
+    <input
+      value={this.state.someField}
+      onChange={e => handleFieldChange(e, 'someField')}
+      onClick={() => handleClick('someField')}
+    />
+  );
+}
+```
+
 
 ### Components
 
