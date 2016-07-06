@@ -477,7 +477,9 @@ renderSomeField() {
 1. `render`.
 
 #### Pure components
-* Write pure components as plain JS objects.
+* Write pure components as plain JS objects. Besides being more concise, this has a small
+  performance advantage because it does not require a component instance to be attached to the
+  rendered element.
 
 ```javascript
 // bad
