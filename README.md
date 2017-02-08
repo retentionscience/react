@@ -132,7 +132,7 @@ const banana     = 'yellow';
 const fruit = { apple, strawberry, banana };
 ```
 * Prefer the object spread operator to `Object.assign` when duplicating objects or creating new
-ones. Note that object spread is still a [Stage 2 proposal for ECMAScript][object-spread] and
+ones. Note that object spread is a [Stage 3 proposal for ECMAScript][object-spread] and
 requires a transformer like [Babel][babel].
 
 ```javascript
